@@ -8,22 +8,12 @@ import {
   Button,
   Typography,
 } from '@mui/material';
+import { getGuestName } from './lib/api';
 
 function HomeContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const rsvpCode = searchParams.get('code') || 'GUEST';
-
-  // Mock function to get guest name from code
-  // TODO: Replace with actual API call
-  const getGuestName = (code: string): string => {
-    const guestMap: { [key: string]: string } = {
-      'ABC123': 'Maria',
-      'XYZ789': 'Juan',
-      'GUEST': 'Friend',
-    };
-    return guestMap[code] || 'Friend';
-  };
 
   const guestName = getGuestName(rsvpCode);
 
@@ -58,7 +48,7 @@ function HomeContent() {
             textTransform: 'uppercase',
           }}
         >
-          ¡Hola {guestName}!
+          ¡Hola nuestros amigos y familiares!
         </Typography>
       </Box>
 

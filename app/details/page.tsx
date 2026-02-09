@@ -26,6 +26,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EventIcon from '@mui/icons-material/Event';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import TrainIcon from '@mui/icons-material/Train';
 
 export default function DetailsPage() {
   const searchParams = useSearchParams();
@@ -545,28 +547,28 @@ export default function DetailsPage() {
                 Location Details
               </Typography>
 
-              <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
-                Can Cortada
-              </Typography>
-
-              <Typography variant="body1" paragraph>
-                A beautiful venue surrounded by nature, perfect for celebrating our special day.
-              </Typography>
-
-              <Typography variant="body1" paragraph>
-                <strong>Address:</strong><br />
-                Can Cortada, Catalonia, Spain
-              </Typography>
-
-              <Typography variant="body1" paragraph>
-                <strong>Getting There:</strong><br />
-                Parking is available on-site. We recommend carpooling or arranging transportation with friends.
-              </Typography>
-
               <Box sx={{ mt: 3, p: 2, backgroundColor: '#FFE8DC', borderRadius: 2 }}>
-                <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary' }}>
-                  💡 Tip: The venue is located in a natural setting. We recommend wearing comfortable shoes suitable for outdoor areas.
+                <Typography variant="body1" sx={{ mb: 1 }}>
+                  <strong>Address:</strong>
                 </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                  <LocationOnIcon sx={{ color: 'secondary.dark', fontSize: '1.2rem' }} />
+                  <Typography variant="body1">Can Cortada, Barcelona, Spain</Typography>
+                </Box>
+
+                <Typography variant="body1" sx={{ mb: 1 }}>
+                  <strong>Getting There:</strong>
+                </Typography>
+                <Box component="ul" sx={{ listStyle: 'none', pl: 0, mb: 2, '& li': { display: 'flex', alignItems: 'center', gap: 1, mb: 1 } }}>
+                  <li>
+                    <DirectionsCarIcon sx={{ color: 'secondary.dark', fontSize: '1.2rem' }} />
+                    Free Parking On-Site
+                  </li>
+                  <li>
+                    <TrainIcon sx={{ color: 'secondary.dark', fontSize: '1.2rem' }} />
+                    Valldaura Station (L3)
+                  </li>
+                </Box>
               </Box>
 
               {/* Google Maps Embed */}

@@ -71,14 +71,16 @@ export default function DetailsPage() {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Box sx={{ my: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5 }}>
-        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '1.25rem' }}>
-          A
-        </Typography>
-        <FavoriteIcon sx={{ color: '#FF6B35', fontSize: '1.25rem' }} />
-        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '1.25rem' }}>
-          C
-        </Typography>
+      <Box sx={{ my: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 0.3 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+          <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '1.25rem' }}>
+            A
+          </Typography>
+          <FavoriteIcon sx={{ color: 'secondary.main', fontSize: '1.25rem' }} />
+          <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '1.25rem' }}>
+            C
+          </Typography>
+        </Box>
         <Typography
           variant="caption"
           sx={{
@@ -86,10 +88,9 @@ export default function DetailsPage() {
             fontSize: '0.8rem',
             letterSpacing: '0.1em',
             fontWeight: 400,
-            ml: 0.5,
           }}
         >
-          est 03.06.10
+          est 03.06.2006
         </Typography>
       </Box>
       <List>
@@ -128,43 +129,52 @@ export default function DetailsPage() {
             sx={{
               flexGrow: 1,
               display: 'flex',
-              alignItems: 'center',
-              gap: { xs: 1, sm: 1.5 },
+              alignItems: 'flex-start',
             }}
           >
-            <Typography
-              variant="h6"
+            <Box
               sx={{
-                color: 'primary.main',
-                fontWeight: 700,
-                fontSize: { xs: '1.1rem', sm: '1.5rem' },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 0.3,
               }}
             >
-              Andrei
-            </Typography>
-            <FavoriteIcon sx={{ color: '#FF6B35', fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'primary.main',
-                fontWeight: 700,
-                fontSize: { xs: '1.1rem', sm: '1.5rem' },
-              }}
-            >
-              Camilia
-            </Typography>
-            <Typography
-              variant="caption"
-              sx={{
-                color: 'text.secondary',
-                fontSize: { xs: '0.75rem', sm: '0.9rem' },
-                letterSpacing: '0.1em',
-                fontWeight: 400,
-                ml: { xs: 0.5, sm: 1 },
-              }}
-            >
-              est 03.06.10
-            </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 } }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: 'primary.main',
+                    fontWeight: 700,
+                    fontSize: { xs: '1.1rem', sm: '1.5rem' },
+                  }}
+                >
+                  Andrei
+                </Typography>
+                <FavoriteIcon sx={{ color: 'secondary.main', fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: 'primary.main',
+                    fontWeight: 700,
+                    fontSize: { xs: '1.1rem', sm: '1.5rem' },
+                  }}
+                >
+                  Camilia
+                </Typography>
+              </Box>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  letterSpacing: '0.1em',
+                  fontWeight: 400,
+                }}
+              >
+                est 03.06.2006
+              </Typography>
+            </Box>
           </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3 }}>
@@ -221,7 +231,7 @@ export default function DetailsPage() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #3843D0 0%, #5C67E8 100%)',
+          background: 'linear-gradient(135deg, #4366F9 0%, #6A85FA 100%)',
           color: 'white',
           textAlign: 'center',
           px: { xs: 2, sm: 3 },
@@ -229,7 +239,7 @@ export default function DetailsPage() {
         }}
       >
         <Container maxWidth="lg">
-          <FavoriteIcon sx={{ fontSize: { xs: 60, md: 80 }, mb: 3, color: '#FF6B35' }} />
+          <FavoriteIcon sx={{ fontSize: { xs: 60, md: 80 }, mb: 3, color: 'secondary.main' }} />
           <Typography
             variant="h1"
             sx={{
@@ -293,7 +303,7 @@ export default function DetailsPage() {
           </Box>
 
           <Box sx={{ mb: { xs: 2.5, md: 3 } }}>
-            <Card sx={{ mb: { xs: 1.5, md: 2 }, border: '2px solid #3843D0' }}>
+            <Card sx={{ mb: { xs: 1.5, md: 2 }, border: '2px solid', borderColor: 'primary.main' }}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.75 }}>
                   <EventIcon sx={{ mr: 2, color: 'secondary.main', fontSize: { xs: 35, md: 40 } }} />
@@ -309,7 +319,7 @@ export default function DetailsPage() {
               </CardContent>
             </Card>
 
-            <Card sx={{ mb: { xs: 1.5, md: 2 }, border: '2px solid #3843D0' }}>
+            <Card sx={{ mb: { xs: 1.5, md: 2 }, border: '2px solid', borderColor: 'primary.main' }}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.75 }}>
                   <AccessTimeIcon sx={{ mr: 2, color: 'secondary.main', fontSize: { xs: 35, md: 40 } }} />
@@ -328,7 +338,7 @@ export default function DetailsPage() {
               </CardContent>
             </Card>
 
-            <Card sx={{ border: '2px solid #3843D0' }}>
+            <Card sx={{ border: '2px solid', borderColor: 'primary.main' }}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.75 }}>
                   <LocationOnIcon sx={{ mr: 2, color: 'secondary.main', fontSize: { xs: 35, md: 40 } }} />
@@ -378,7 +388,7 @@ export default function DetailsPage() {
         ref={lookRef}
         sx={{
           minHeight: '100vh',
-          backgroundColor: '#F5EFE7',
+          backgroundColor: 'background.default',
           pt: { xs: 10, md: 12 },
           pb: { xs: 4, md: 6 },
           px: { xs: 1.5, sm: 2 },
@@ -397,13 +407,9 @@ export default function DetailsPage() {
                 letterSpacing: '0.05em',
               }}
             >
-              THE OUTFIT
-            </Typography>
-            <Typography variant="h5" color="text.secondary" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-              Style Suggestion
+              STYLE GUIDE
             </Typography>
           </Box>
-
           {/* Dress Code Image - Clickable */}
           <Box
             onClick={() => setImageOpen(true)}
@@ -451,24 +457,27 @@ export default function DetailsPage() {
       <Dialog
         open={imageOpen}
         onClose={() => setImageOpen(false)}
-        maxWidth="xl"
-        fullWidth
+        maxWidth={false}
+        fullScreen
         PaperProps={{
           sx: {
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
             boxShadow: 'none',
-            maxHeight: '95vh',
+            m: 0,
           },
         }}
       >
         <DialogContent
           sx={{
             p: 0,
+            m: 0,
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            width: '100vw',
+            height: '100vh',
           }}
         >
           <Box
@@ -476,7 +485,7 @@ export default function DetailsPage() {
             sx={{
               position: 'relative',
               width: '100%',
-              height: '90vh',
+              height: '100%',
               cursor: 'pointer',
             }}
           >
@@ -495,7 +504,7 @@ export default function DetailsPage() {
         ref={venueRef}
         sx={{
           minHeight: '100vh',
-          backgroundColor: '#F5EFE7',
+          backgroundColor: 'background.paper',
           pt: { xs: 10, md: 12 },
           pb: { xs: 4, md: 6 },
           px: { xs: 1.5, sm: 2 },
@@ -523,7 +532,8 @@ export default function DetailsPage() {
 
           <Card
             sx={{
-              border: '3px solid #3843D0',
+              border: '3px solid',
+              borderColor: 'primary.main',
               borderRadius: 3,
             }}
           >

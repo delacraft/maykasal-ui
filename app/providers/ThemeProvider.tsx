@@ -7,17 +7,17 @@ import { ReactNode } from 'react';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#3843D0', // Royal blue mula sa invitation
-      light: '#5C67E8',
-      dark: '#2534B8',
+      main: '#4366F9', // Exact blue from invitation
+      light: '#6A85FA', // Lighter blue
+      dark: '#2D4DD6', // Darker blue
     },
     secondary: {
-      main: '#FF6B35', // Orange/coral accent
-      light: '#FF8C61',
-      dark: '#E55A2B',
+      main: '#FD934F', // Exact orange from invitation
+      light: '#FDAC75', // Lighter orange
+      dark: '#E67B3A', // Darker orange
     },
     background: {
-      default: '#F5EFE7', // Cream/beige background
+      default: '#F9F9F0', // Exact cream from invitation
       paper: '#FFFEFA', // Off-white paper
     },
     text: {
@@ -26,11 +26,11 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Sailors", cursive, sans-serif',
+    fontFamily: '"Sailors Slant", sans-serif',
     h1: {
       fontSize: '2.5rem',
       fontWeight: 700,
-      color: '#FF6B35',
+      color: '#FD934F',
       letterSpacing: '0.03em',
     },
     h2: {
@@ -50,7 +50,7 @@ const theme = createTheme({
       textTransform: 'none',
       fontWeight: 600,
       letterSpacing: '0.02em',
-      fontFamily: '"Sailors", cursive',
+      fontFamily: '"Sailors Slant", sans-serif',
     },
   },
   shape: {
@@ -64,6 +64,19 @@ const theme = createTheme({
           fontWeight: 600,
           borderRadius: 12,
           letterSpacing: '0.02em',
+          transition: 'all 0.3s ease',
+        },
+        contained: {
+          '&:hover': {
+            transform: 'scale(1.05)',
+            boxShadow: '0 6px 24px rgba(0, 0, 0, 0.2)',
+          },
+        },
+        outlined: {
+          '&:hover': {
+            backgroundColor: 'rgba(67, 102, 249, 0.08)',
+            transform: 'scale(1.02)',
+          },
         },
       },
     },

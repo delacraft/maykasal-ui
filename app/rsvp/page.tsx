@@ -76,7 +76,7 @@ export default function RSVPPage() {
     <Box
       sx={{
         minHeight: '100vh',
-        backgroundColor: '#F5EFE7',
+        backgroundColor: 'background.default',
         py: { xs: 3, md: 5 },
         px: { xs: 1.5, sm: 2 },
         display: 'flex',
@@ -114,7 +114,8 @@ export default function RSVPPage() {
 
         <Card
           sx={{
-            border: '2px solid #3843D0',
+            border: '2px solid',
+            borderColor: 'primary.main',
             borderRadius: 3,
             p: { xs: 1.5, sm: 2.5, md: 3 },
           }}
@@ -253,6 +254,7 @@ export default function RSVPPage() {
                 py: 1.5,
                 fontSize: '1.1rem',
                 fontWeight: 700,
+                color: 'white'
               }}
             >
               Submit RSVP

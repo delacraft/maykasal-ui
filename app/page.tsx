@@ -40,9 +40,27 @@ export default function Home() {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#F5EFE7'
+        backgroundColor: 'background.default'
       }}
     >
+      {/* Greeting Text - Above Image */}
+      <Box sx={{ pt: { xs: 3, sm: 4 }, px: { xs: 1.5, sm: 2 }, backgroundColor: 'primary.main' }}>
+        <Typography
+          variant="h4"
+          sx={{
+            textAlign: 'center',
+            fontWeight: 600,
+            fontSize: { xs: '1.5rem', sm: '1.8rem' },
+            color: 'secondary.main',
+            mb: { xs: 2, sm: 3 },
+            fontFamily: '"Sailors Slant", sans-serif',
+            textTransform: 'uppercase',
+          }}
+        >
+          ¡Hola {guestName}!
+        </Typography>
+      </Box>
+
       {/* Invitation Image - Full width, edge-to-edge */}
       <Box
         sx={{
@@ -50,6 +68,7 @@ export default function Home() {
           width: '100%',
           flex: 1,
           minHeight: '72vh',
+          backgroundColor: 'background.default',
         }}
       >
         <Image
@@ -64,22 +83,8 @@ export default function Home() {
         />
       </Box>
 
-      {/* Greeting and Buttons */}
-      <Box sx={{ px: { xs: 1.5, sm: 2 }, pb: { xs: 2, sm: 2.5 }, backgroundColor: '#F5EFE7' }}>
-        {/* Greeting Text */}
-        <Typography
-          variant="h4"
-          sx={{
-            textAlign: 'center',
-            fontWeight: 600,
-            fontSize: { xs: '1.5rem', sm: '1.8rem' },
-            color: '#3843D0',
-            mb: { xs: 1, sm: 1.5 },
-          }}
-        >
-          Hey {guestName}! Come to our wedding!
-        </Typography>
-
+      {/* Buttons */}
+      <Box sx={{ px: { xs: 1.5, sm: 2 }, pb: { xs: 2, sm: 2.5 }, backgroundColor: 'background.default' }}>
         {/* YES/NO Buttons */}
         <Box
           sx={{
@@ -101,18 +106,21 @@ export default function Home() {
               px: { xs: 4, sm: 5 },
               fontSize: { xs: '1.1rem', sm: '1.3rem' },
               fontWeight: 600,
+              fontFamily: '"Sailors Slant", sans-serif',
               backgroundColor: '#FFFFFF',
-              border: '3px solid #3843D0',
-              color: '#3843D0',
+              border: '3px solid',
+              borderColor: 'primary.main',
+              color: 'primary.main',
               borderRadius: 3,
               letterSpacing: '0.02em',
-              textTransform: 'none',
+              textTransform: 'uppercase',
               minWidth: { xs: '220px', sm: '240px' },
-              boxShadow: '0 4px 20px rgba(56, 67, 208, 0.3)',
+              boxShadow: '0 4px 20px rgba(67, 102, 249, 0.3)',
               '&:hover': {
                 backgroundColor: '#FFFFFF',
-                border: '3px solid #3843D0',
-                boxShadow: '0 6px 30px rgba(56, 67, 208, 0.5)',
+                border: '3px solid',
+                borderColor: 'primary.main',
+                boxShadow: '0 6px 30px rgba(67, 102, 249, 0.5)',
                 transform: 'scale(1.02)',
               },
               transition: 'all 0.3s ease',
@@ -130,17 +138,19 @@ export default function Home() {
               px: { xs: 3, sm: 4 },
               fontSize: { xs: '0.95rem', sm: '1.1rem' },
               fontWeight: 600,
+              fontFamily: '"Sailors Slant", sans-serif',
               backgroundColor: '#FFFFFF',
               border: '2px solid #999',
               color: '#666',
               borderRadius: 3,
               letterSpacing: '0.02em',
-              textTransform: 'none',
+              textTransform: 'uppercase',
               minWidth: { xs: '160px', sm: '180px' },
               boxShadow: '0 4px 15px rgba(0, 0, 0, 0.15)',
               '&:hover': {
-                backgroundColor: '#FFFFFF',
-                border: '2px solid #999',
+                backgroundColor: '#F5F5F5',
+                border: '2px solid #777',
+                color: '#555',
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)',
                 transform: 'scale(1.02)',
               },

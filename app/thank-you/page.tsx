@@ -23,7 +23,7 @@ export default function ThankYouPage() {
     <Box
       sx={{
         minHeight: '100vh',
-        backgroundColor: '#F5EFE7',
+        backgroundColor: 'background.default',
         py: 3,
         px: { xs: 1.5, sm: 0 },
         display: 'flex',
@@ -85,7 +85,8 @@ export default function ThankYouPage() {
                   borderRadius: 2,
                   mb: 2.5,
                   textAlign: 'left',
-                  border: '2px solid #3843D0',
+                  border: '2px solid',
+                  borderColor: 'primary.main',
                 }}
               >
                 <Typography
@@ -146,7 +147,8 @@ export default function ThankYouPage() {
                   p: { xs: 1.5, sm: 2 },
                   borderRadius: 2,
                   mb: 2.5,
-                  border: '1px solid #FF6B35',
+                  border: '1px solid',
+                  borderColor: 'secondary.main',
                   fontSize: { xs: '0.85rem', sm: '0.9rem' },
                 }}
               >
@@ -205,6 +207,7 @@ export default function ThankYouPage() {
               px: { xs: 3, sm: 4 },
               py: { xs: 1.25, sm: 1.5 },
               fontSize: { xs: '1rem', sm: '1.1rem' },
+              color: 'white'
             }}
           >
             View Event Details

@@ -25,10 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tl">
-      <head>
-        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
-        <link href="https://fonts.cdnfonts.com/css/sailors" rel="stylesheet" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

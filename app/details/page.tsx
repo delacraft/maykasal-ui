@@ -62,13 +62,35 @@ function DetailsPageContent() {
     const eventTitle = 'Andrei and Cam are finally getting married!';
     const eventDetails = 'Join us for an evening of good food, wine and those we love';
     const eventLocation = 'Can Cortada, Catalonia, Spain';
-    const startDate = '20260306T200000'; // March 6, 2026, 8:00 PM
-    const endDate = '20260307T020000'; // March 7, 2026, 2:00 AM (6 hours later)
+    const startDate = '20260306T200000Z'; // March 6, 2026, 8:00 PM
+    const endDate = '20260307T020000Z'; // March 7, 2026, 2:00 AM (6 hours later)
 
-    // Google Calendar URL
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}`;
+    // Create ICS file content
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding RSVP//EN
+BEGIN:VEVENT
+UID:${Date.now()}@wedding-rsvp.com
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:${startDate}
+DTEND:${endDate}
+SUMMARY:${eventTitle}
+DESCRIPTION:${eventDetails}
+LOCATION:${eventLocation}
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
 
-    window.open(googleCalendarUrl, '_blank');
+    // Create blob and download link
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'andrei-and-cam-wedding.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const drawer = (

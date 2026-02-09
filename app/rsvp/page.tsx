@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Box,
@@ -24,7 +24,7 @@ interface FormData {
   message: string;
 }
 
-export default function RSVPPage() {
+function RSVPContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const rsvpCode = searchParams.get('code');
@@ -271,5 +271,13 @@ export default function RSVPPage() {
         </Typography>
       </Container>
     </Box>
+  );
+}
+
+export default function RSVPPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RSVPContent />
+    </Suspense>
   );
 }

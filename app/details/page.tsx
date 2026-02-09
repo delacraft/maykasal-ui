@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import {
@@ -29,7 +29,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import TrainIcon from '@mui/icons-material/Train';
 
-export default function DetailsPage() {
+function DetailsPageContent() {
   const searchParams = useSearchParams();
   const rsvpCode = searchParams.get('code');
 
@@ -596,5 +596,13 @@ export default function DetailsPage() {
         </Container>
       </Box>
     </>
+  );
+}
+
+export default function DetailsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DetailsPageContent />
+    </Suspense>
   );
 }

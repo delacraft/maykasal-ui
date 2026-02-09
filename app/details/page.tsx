@@ -18,11 +18,11 @@ import {
   Card,
   CardContent,
   Button,
+  Dialog,
+  DialogContent,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import StyleIcon from '@mui/icons-material/Style';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EventIcon from '@mui/icons-material/Event';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -32,19 +32,18 @@ export default function DetailsPage() {
   const rsvpCode = searchParams.get('code');
 
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
 
   // Refs for sections
   const heroRef = useRef<HTMLDivElement>(null);
   const eventRef = useRef<HTMLDivElement>(null);
   const lookRef = useRef<HTMLDivElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
   const venueRef = useRef<HTMLDivElement>(null);
 
   const menuItems = [
     { label: 'Home', ref: heroRef },
     { label: 'Event Details', ref: eventRef },
     { label: 'The Outfit', ref: lookRef },
-    { label: 'The Menu', ref: menuRef },
     { label: 'The Venue', ref: venueRef },
   ];
 
@@ -57,11 +56,42 @@ export default function DetailsPage() {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleAddToCalendar = () => {
+    const eventTitle = 'Andrei and Cam are finally getting married!';
+    const eventDetails = 'Join us for an evening of good food, wine and those we love';
+    const eventLocation = 'Can Cortada, Catalonia, Spain';
+    const startDate = '20260306T200000'; // March 6, 2026, 8:00 PM
+    const endDate = '20260307T020000'; // March 7, 2026, 2:00 AM (6 hours later)
+
+    // Google Calendar URL
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}`;
+
+    window.open(googleCalendarUrl, '_blank');
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2, color: 'primary.main', fontWeight: 700 }}>
-        A & C
-      </Typography>
+      <Box sx={{ my: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5 }}>
+        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '1.25rem' }}>
+          A
+        </Typography>
+        <FavoriteIcon sx={{ color: '#FF6B35', fontSize: '1.25rem' }} />
+        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, fontSize: '1.25rem' }}>
+          C
+        </Typography>
+        <Typography
+          variant="caption"
+          sx={{
+            color: 'text.secondary',
+            fontSize: '0.8rem',
+            letterSpacing: '0.1em',
+            fontWeight: 400,
+            ml: 0.5,
+          }}
+        >
+          est 03.06.10
+        </Typography>
+      </Box>
       <List>
         {menuItems.map((item) => (
           <ListItem key={item.label} disablePadding>
@@ -69,7 +99,13 @@ export default function DetailsPage() {
               sx={{ textAlign: 'center' }}
               onClick={() => scrollToSection(item.ref)}
             >
-              <ListItemText primary={item.label} />
+              <ListItemText
+                primary={item.label}
+                primaryTypographyProps={{
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -88,18 +124,48 @@ export default function DetailsPage() {
         }}
       >
         <Toolbar>
-          <Typography
-            variant="h6"
-            component="div"
+          <Box
             sx={{
               flexGrow: 1,
-              color: 'primary.main',
-              fontWeight: 700,
-              fontSize: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: { xs: 1, sm: 1.5 },
             }}
           >
-            ANDREI & CAMILIA
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                color: 'primary.main',
+                fontWeight: 700,
+                fontSize: { xs: '1.1rem', sm: '1.5rem' },
+              }}
+            >
+              Andrei
+            </Typography>
+            <FavoriteIcon sx={{ color: '#FF6B35', fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
+            <Typography
+              variant="h6"
+              sx={{
+                color: 'primary.main',
+                fontWeight: 700,
+                fontSize: { xs: '1.1rem', sm: '1.5rem' },
+              }}
+            >
+              Camilia
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+                fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                letterSpacing: '0.1em',
+                fontWeight: 400,
+                ml: { xs: 0.5, sm: 1 },
+              }}
+            >
+              est 03.06.10
+            </Typography>
+          </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3 }}>
             {menuItems.map((item) => (
@@ -109,6 +175,7 @@ export default function DetailsPage() {
                 sx={{
                   color: 'text.primary',
                   fontWeight: 600,
+                  fontSize: '1.05rem',
                   '&:hover': {
                     color: 'secondary.main',
                   },
@@ -277,6 +344,32 @@ export default function DetailsPage() {
               </CardContent>
             </Card>
           </Box>
+
+          {/* Add to Calendar Button */}
+          <Box sx={{ textAlign: 'center', mt: 3 }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={handleAddToCalendar}
+              startIcon={<EventIcon sx={{ color: 'white' }} />}
+              sx={{
+                py: 1.5,
+                px: 4,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+                fontWeight: 700,
+                color: 'white',
+                boxShadow: '0 4px 20px rgba(255, 107, 53, 0.3)',
+                '&:hover': {
+                  boxShadow: '0 6px 30px rgba(255, 107, 53, 0.5)',
+                  transform: 'scale(1.02)',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Add to Calendar
+            </Button>
+          </Box>
         </Container>
       </Box>
 
@@ -293,7 +386,7 @@ export default function DetailsPage() {
       >
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
-            <StyleIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
+            <FavoriteIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
             <Typography
               variant="h2"
               sx={{
@@ -311,8 +404,9 @@ export default function DetailsPage() {
             </Typography>
           </Box>
 
-          {/* Dress Code Image */}
+          {/* Dress Code Image - Clickable */}
           <Box
+            onClick={() => setImageOpen(true)}
             sx={{
               position: 'relative',
               width: '100%',
@@ -320,7 +414,70 @@ export default function DetailsPage() {
               height: { xs: 'auto', sm: '700px', md: '900px' },
               minHeight: { xs: '500px', sm: '700px' },
               mx: 'auto',
-              mb: 4,
+              mb: 2,
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              '&:hover': {
+                transform: 'scale(1.02)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+              },
+              borderRadius: 2,
+              overflow: 'hidden',
+            }}
+          >
+            <Image
+              src="/dresscode.png"
+              alt="Dress Code"
+              fill
+              style={{ objectFit: 'contain', border: 'none' }}
+            />
+          </Box>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              textAlign: 'center',
+              fontStyle: 'italic',
+              fontSize: { xs: '0.85rem', sm: '0.9rem' },
+            }}
+          >
+            Click image to view full screen
+          </Typography>
+        </Container>
+      </Box>
+
+      {/* Image Modal */}
+      <Dialog
+        open={imageOpen}
+        onClose={() => setImageOpen(false)}
+        maxWidth="xl"
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+            maxHeight: '95vh',
+          },
+        }}
+      >
+        <DialogContent
+          sx={{
+            p: 0,
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          }}
+        >
+          <Box
+            onClick={() => setImageOpen(false)}
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: '90vh',
+              cursor: 'pointer',
             }}
           >
             <Image
@@ -330,173 +487,8 @@ export default function DetailsPage() {
               style={{ objectFit: 'contain' }}
             />
           </Box>
-
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{
-              textAlign: 'center',
-              fontStyle: 'italic',
-              fontSize: { xs: '0.9rem', sm: '1rem' },
-            }}
-          >
-            Please avoid wearing black and white
-          </Typography>
-        </Container>
-      </Box>
-
-      {/* The Menu Section */}
-      <Box
-        ref={menuRef}
-        sx={{
-          minHeight: '100vh',
-          backgroundColor: '#FFFEFA',
-          pt: { xs: 10, md: 12 },
-          pb: { xs: 4, md: 6 },
-          px: { xs: 1.5, sm: 2 },
-        }}
-      >
-        <Container maxWidth="lg">
-          <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
-            <RestaurantIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
-                fontWeight: 700,
-                color: 'secondary.main',
-                mb: 2,
-                letterSpacing: '0.05em',
-              }}
-            >
-              THE MENU
-            </Typography>
-            <Typography variant="h5" color="text.secondary" sx={{ fontStyle: 'italic', fontSize: { xs: '1rem', sm: '1.25rem' }, px: { xs: 2, sm: 0 } }}>
-              An evening of good food, wine and those we love
-            </Typography>
-          </Box>
-
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 3 } }}>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 2, md: 3 } }}>
-              <Box sx={{ flex: 1 }}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    border: '2px solid #3843D0',
-                    borderRadius: 3,
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="h5"
-                      sx={{ color: 'primary.main', fontWeight: 700, mb: 2, textAlign: 'center', fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
-                    >
-                      Appetizers
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Charcuterie & Cheese Board
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Caprese Skewers
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Bruschetta Trio
-                    </Typography>
-                    <Typography variant="body1">
-                      • Seasonal Soup
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-
-              <Box sx={{ flex: 1 }}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    border: '2px solid #3843D0',
-                    borderRadius: 3,
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="h5"
-                      sx={{ color: 'primary.main', fontWeight: 700, mb: 2, textAlign: 'center', fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
-                    >
-                      Main Course
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Grilled Sea Bass with Herbs
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Roasted Chicken Supreme
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Vegetarian Risotto
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                      Served with seasonal vegetables and potatoes
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-
-              <Box sx={{ flex: 1 }}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    border: '2px solid #3843D0',
-                    borderRadius: 3,
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="h5"
-                      sx={{ color: 'primary.main', fontWeight: 700, mb: 2, textAlign: 'center', fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
-                    >
-                      Desserts
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Wedding Cake
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Tiramisu
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                      • Chocolate Fondant
-                    </Typography>
-                    <Typography variant="body1">
-                      • Fresh Fruit Platter
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-            </Box>
-
-            <Card
-              sx={{
-                backgroundColor: '#FFE8DC',
-                border: '2px solid #FF6B35',
-                borderRadius: 3,
-              }}
-            >
-              <CardContent sx={{ textAlign: 'center' }}>
-                <Typography
-                  variant="h5"
-                  sx={{ color: 'secondary.main', fontWeight: 700, mb: 2 }}
-                >
-                  Beverages
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Selection of wines, beers, cocktails, and non-alcoholic beverages
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 2, fontStyle: 'italic' }}>
-                  Please let us know of any dietary restrictions in your RSVP
-                </Typography>
-              </CardContent>
-            </Card>
-          </Box>
-        </Container>
-      </Box>
+        </DialogContent>
+      </Dialog>
 
       {/* The Venue Section */}
       <Box
@@ -565,6 +557,27 @@ export default function DetailsPage() {
                 <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary' }}>
                   💡 Tip: The venue is located in a natural setting. We recommend wearing comfortable shoes suitable for outdoor areas.
                 </Typography>
+              </Box>
+
+              {/* Google Maps Embed */}
+              <Box
+                sx={{
+                  mt: 3,
+                  width: '100%',
+                  height: { xs: '300px', sm: '400px', md: '450px' },
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                }}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2991.122996079522!2d2.1502381774840877!3d41.43655277129363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4bd5b6e115a83%3A0xabf60b66408d4ed4!2sCan%20Cortada!5e0!3m2!1sen!2ses!4v1770671035859!5m2!1sen!2ses"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </Box>
             </CardContent>
           </Card>

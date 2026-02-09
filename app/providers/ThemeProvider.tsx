@@ -26,7 +26,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Comic Sans MS", "Marker Felt", "Brush Script MT", cursive, sans-serif',
+    fontFamily: '"Sailors", cursive, sans-serif',
     h1: {
       fontSize: '2.5rem',
       fontWeight: 700,
@@ -50,7 +50,7 @@ const theme = createTheme({
       textTransform: 'none',
       fontWeight: 600,
       letterSpacing: '0.02em',
-      fontFamily: '"Comic Sans MS", "Marker Felt", cursive',
+      fontFamily: '"Sailors", cursive',
     },
   },
   shape: {

@@ -20,6 +20,7 @@ import {
   Button,
   Dialog,
   DialogContent,
+  Snackbar,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -28,22 +29,28 @@ import EventIcon from '@mui/icons-material/Event';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import TrainIcon from '@mui/icons-material/Train';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 
 function HomePageContent() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
+  const [copyMessage, setCopyMessage] = useState<string | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   // Refs for sections
   const heroRef = useRef<HTMLDivElement>(null);
   const eventRef = useRef<HTMLDivElement>(null);
   const lookRef = useRef<HTMLDivElement>(null);
   const venueRef = useRef<HTMLDivElement>(null);
+  const giftsRef = useRef<HTMLDivElement>(null);
 
   const menuItems = [
     { label: 'Home', ref: heroRef },
     { label: 'Event Details', ref: eventRef },
     { label: 'The Outfit', ref: lookRef },
     { label: 'The Venue', ref: venueRef },
+    { label: 'Gifts', ref: giftsRef },
   ];
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
@@ -53,6 +60,17 @@ function HomePageContent() {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleCopyToClipboard = async (text: string, message: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyMessage(message);
+      setSnackbarOpen(true);
+    } catch {
+      setCopyMessage('Copy failed. Please copy manually.');
+      setSnackbarOpen(true);
+    }
   };
 
   const handleAddToCalendar = () => {
@@ -302,7 +320,7 @@ END:VCALENDAR`;
               fontWeight: 400,
             }}
           >
-            invite you to their wedding dinner
+            Wedding Celebration
           </Typography>
           <Typography variant="h5" sx={{ mb: 0.75, fontSize: { xs: '1rem', sm: '1.25rem' } }}>
             March 6, 2026 | 8:00 PM
@@ -635,6 +653,109 @@ END:VCALENDAR`;
           </Card>
         </Container>
       </Box>
+
+      {/* Gifts Section */}
+      <Box
+        ref={giftsRef}
+        sx={{
+          minHeight: '80vh',
+          backgroundColor: 'background.default',
+          pt: { xs: 10, md: 12 },
+          pb: { xs: 4, md: 6 },
+          px: { xs: 1.5, sm: 2 },
+        }}
+      >
+        <Container maxWidth="md">
+          <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
+            <FavoriteIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                fontWeight: 700,
+                color: 'secondary.main',
+                mb: 2,
+                letterSpacing: '0.05em',
+              }}
+            >
+              GIFTS
+            </Typography>
+          </Box>
+
+          <Typography
+            variant="body1"
+            sx={{
+              textAlign: 'center',
+              fontStyle: 'italic',
+              fontSize: { xs: '1rem', sm: '1.1rem' },
+              lineHeight: 1.7,
+              mb: 4,
+              color: 'text.primary',
+              px: { xs: 1, sm: 2 },
+            }}
+          >
+            With all that we have, we&apos;ve been truly blessed. Your presence &amp; prayers are all that we request. But if you desire to give us nontheless, monetary gift is one we suggest.
+          </Typography>
+
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, mx: 'auto' }}>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => handleCopyToClipboard('ES11 1583 0001 1390 6105 6565', 'IBAN copied to clipboard!')}
+              startIcon={<AccountBalanceIcon sx={{ color: 'secondary.main' }} />}
+              sx={{
+                py: 2,
+                border: '2px solid',
+                borderColor: 'primary.main',
+                color: 'primary.main',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                '&:hover': {
+                  borderColor: 'primary.dark',
+                  backgroundColor: 'rgba(67, 102, 249, 0.06)',
+                },
+              }}
+            >
+              IBAN
+            </Button>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => handleCopyToClipboard('+34659570735', 'Bizum copied to clipboard!')}
+              startIcon={<PhoneIphoneIcon sx={{ color: 'secondary.main' }} />}
+              sx={{
+                py: 2,
+                border: '2px solid',
+                borderColor: 'primary.main',
+                color: 'primary.main',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                '&:hover': {
+                  borderColor: 'primary.dark',
+                  backgroundColor: 'rgba(67, 102, 249, 0.06)',
+                },
+              }}
+            >
+              Bizum
+            </Button>
+          </Box>
+        </Container>
+      </Box>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        message={copyMessage}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        ContentProps={{
+          sx: {
+            backgroundColor: 'primary.dark',
+            color: 'white',
+            fontWeight: 600,
+          },
+        }}
+      />
     </>
   );
 }

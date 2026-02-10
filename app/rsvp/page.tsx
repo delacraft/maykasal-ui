@@ -38,17 +38,17 @@ function RSVPPageContent() {
             textTransform: 'uppercase',
           }}
         >
-          ¡Hola nuestros amigos y familiares!
+          ¡Hola nuestros amigos!
         </Typography>
       </Box>
 
-      {/* Invitation Image - Full width, edge-to-edge */}
+      {/* Invitation Image - smaller on mobile so button stays visible */}
       <Box
         sx={{
           position: 'relative',
           width: '100%',
           flex: 1,
-          minHeight: '72vh',
+          minHeight: { xs: '48vh', sm: '60vh', md: '72vh' },
           backgroundColor: 'background.default',
         }}
       >
@@ -64,8 +64,8 @@ function RSVPPageContent() {
         />
       </Box>
 
-      {/* RSVP Button */}
-      <Box sx={{ px: { xs: 1.5, sm: 2 }, pb: { xs: 2, sm: 2.5 }, backgroundColor: 'background.default' }}>
+      {/* RSVP Button - pt so it sits higher, pb for safe area on notched phones */}
+      <Box sx={{ px: { xs: 1.5, sm: 2 }, pt: { xs: 2, sm: 2.5 }, pb: { xs: 3, sm: 3 }, backgroundColor: 'background.default' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             variant="outlined"

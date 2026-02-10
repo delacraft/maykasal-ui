@@ -1,283 +1,111 @@
 'use client';
 
-import { useState, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import {
   Box,
-  Container,
-  Typography,
   Button,
-  Card,
-  TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Divider,
+  Typography,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 
-interface FormData {
-  mainCourse: string;
-  dietaryRestrictions: string;
-  message: string;
-}
-
-function RSVPContent() {
-  const searchParams = useSearchParams();
+function RSVPPageContent() {
   const router = useRouter();
-  const rsvpCode = searchParams.get('code');
 
-  const [formData, setFormData] = useState<FormData>({
-    mainCourse: '',
-    dietaryRestrictions: '',
-    message: '',
-  });
-  const [errors, setErrors] = useState<Partial<FormData>>({});
-
-  const handleChange = (field: keyof FormData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [field]: e.target.value,
-    });
-
-    if (errors[field]) {
-      setErrors({
-        ...errors,
-        [field]: undefined,
-      });
-    }
-  };
-
-  const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {};
-
-    if (!formData.mainCourse) {
-      newErrors.mainCourse = 'Please select a main course';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      console.log('Form submitted:', { ...formData, rsvpCode });
-      router.push(`/thank-you?code=${rsvpCode}&attending=true`);
-    }
+  const goToRSVP = () => {
+    router.push('/rsvp-confirmation');
   };
 
   return (
     <Box
       sx={{
         minHeight: '100vh',
-        backgroundColor: 'background.default',
-        py: { xs: 3, md: 5 },
-        px: { xs: 1.5, sm: 2 },
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
+        backgroundColor: 'background.default'
       }}
     >
-      <Container maxWidth="md">
-        <Box sx={{ textAlign: 'center', mb: { xs: 2.5, md: 3 } }}>
-          <FavoriteIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: '1.8rem', sm: '2.5rem', md: '3rem' },
-              fontWeight: 700,
-              color: 'secondary.main',
-              mb: 1.5,
-              letterSpacing: '0.05em',
-            }}
-          >
-            RSVP
-          </Typography>
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{
-              fontSize: { xs: '0.85rem', sm: '0.95rem' },
-              maxWidth: '500px',
-              mx: 'auto',
-              lineHeight: 1.5,
-            }}
-          >
-            We'd love to celebrate with you, but we need some details from you first
-          </Typography>
-        </Box>
-
-        <Card
+      {/* Greeting Text - Above Image */}
+      <Box sx={{ pt: { xs: 3, sm: 4 }, px: { xs: 1.5, sm: 2 }, backgroundColor: 'primary.main' }}>
+        <Typography
+          variant="h4"
           sx={{
-            border: '2px solid',
-            borderColor: 'primary.main',
-            borderRadius: 3,
-            p: { xs: 1.5, sm: 2.5, md: 3 },
+            textAlign: 'center',
+            fontWeight: 600,
+            fontSize: { xs: '1.5rem', sm: '1.8rem' },
+            color: 'secondary.main',
+            mb: { xs: 2, sm: 3 },
+            fontFamily: '"Sailors Slant", sans-serif',
+            textTransform: 'uppercase',
           }}
         >
-          <form onSubmit={handleSubmit}>
-            {/* Menu Selection */}
-            <FormControl component="fieldset" fullWidth sx={{ mb: 3 }}>
-              <FormLabel
-                component="legend"
-                sx={{
-                  fontWeight: 700,
-                  color: 'primary.main',
-                  mb: 1.5,
-                  fontSize: { xs: '1rem', sm: '1.1rem' },
-                }}
-              >
-                Select Your Main Course *
-              </FormLabel>
-
-              <RadioGroup
-                value={formData.mainCourse}
-                onChange={handleChange('mainCourse')}
-              >
-                <FormControlLabel
-                  value="seabass"
-                  control={<Radio color="secondary" size="small" />}
-                  label={
-                    <Box>
-                      <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
-                        Grilled Sea Bass
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
-                        Fresh sea bass with seasonal vegetables
-                      </Typography>
-                    </Box>
-                  }
-                  sx={{
-                    mb: 1,
-                    p: { xs: 1.5, sm: 1.5 },
-                    ml: 0,
-                    borderRadius: 1,
-                    border: '1px solid',
-                    borderColor: formData.mainCourse === 'seabass' ? 'secondary.main' : 'divider',
-                    backgroundColor: formData.mainCourse === 'seabass' ? 'rgba(255, 107, 53, 0.05)' : 'transparent',
-                  }}
-                />
-
-                <FormControlLabel
-                  value="chicken"
-                  control={<Radio color="secondary" size="small" />}
-                  label={
-                    <Box>
-                      <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
-                        Roasted Chicken
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
-                        Tender chicken with vegetables
-                      </Typography>
-                    </Box>
-                  }
-                  sx={{
-                    mb: 1,
-                    p: { xs: 1.5, sm: 1.5 },
-                    ml: 0,
-                    borderRadius: 1,
-                    border: '1px solid',
-                    borderColor: formData.mainCourse === 'chicken' ? 'secondary.main' : 'divider',
-                    backgroundColor: formData.mainCourse === 'chicken' ? 'rgba(255, 107, 53, 0.05)' : 'transparent',
-                  }}
-                />
-
-                <FormControlLabel
-                  value="vegetarian"
-                  control={<Radio color="secondary" size="small" />}
-                  label={
-                    <Box>
-                      <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
-                        Vegetarian Risotto
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
-                        Creamy risotto with seasonal vegetables
-                      </Typography>
-                    </Box>
-                  }
-                  sx={{
-                    p: { xs: 1.5, sm: 1.5 },
-                    ml: 0,
-                    borderRadius: 1,
-                    border: '1px solid',
-                    borderColor: formData.mainCourse === 'vegetarian' ? 'secondary.main' : 'divider',
-                    backgroundColor: formData.mainCourse === 'vegetarian' ? 'rgba(255, 107, 53, 0.05)' : 'transparent',
-                  }}
-                />
-              </RadioGroup>
-              {errors.mainCourse && (
-                <Typography variant="caption" color="error" sx={{ mt: 1, ml: 2 }}>
-                  {errors.mainCourse}
-                </Typography>
-              )}
-            </FormControl>
-
-            <Divider sx={{ my: 2.5 }} />
-
-            {/* Dietary Restrictions */}
-            <TextField
-              fullWidth
-              label="Dietary Restrictions or Special Requests"
-              multiline
-              rows={3}
-              value={formData.dietaryRestrictions}
-              onChange={handleChange('dietaryRestrictions')}
-              placeholder="E.g., Vegetarian, Allergies, Gluten-free, etc."
-              sx={{ mb: 2.5 }}
-            />
-
-            {/* Message */}
-            <TextField
-              fullWidth
-              label="Message for the Couple (Optional)"
-              multiline
-              rows={3}
-              value={formData.message}
-              onChange={handleChange('message')}
-              placeholder="Share your wishes for us..."
-              sx={{ mb: 2.5 }}
-            />
-
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              size="large"
-              fullWidth
-              sx={{
-                py: 1.5,
-                fontSize: '1.1rem',
-                fontWeight: 700,
-                color: 'white'
-              }}
-            >
-              Submit RSVP
-            </Button>
-          </form>
-        </Card>
-
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mt: 2, textAlign: 'center', fontSize: { xs: '0.8rem', sm: '0.875rem' } }}
-        >
-          Please RSVP by February 28, 2026
+          ¡Hola nuestros amigos y familiares!
         </Typography>
-      </Container>
+      </Box>
+
+      {/* Invitation Image - Full width, edge-to-edge */}
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          flex: 1,
+          minHeight: '72vh',
+          backgroundColor: 'background.default',
+        }}
+      >
+        <Image
+          src="/invitation.png"
+          alt="Wedding Invitation"
+          fill
+          style={{
+            objectFit: 'contain',
+            objectPosition: 'center top',
+          }}
+          priority
+        />
+      </Box>
+
+      {/* RSVP Button */}
+      <Box sx={{ px: { xs: 1.5, sm: 2 }, pb: { xs: 2, sm: 2.5 }, backgroundColor: 'background.default' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={goToRSVP}
+            color="secondary"
+            sx={{
+              py: { xs: 2, sm: 2.5 },
+              px: { xs: 4, sm: 5 },
+              fontSize: { xs: '1.1rem', sm: '1.3rem' },
+              fontWeight: 600,
+              fontFamily: '"Sailors Slant", sans-serif',
+              backgroundColor: '#FFFFFF',
+              border: '3px solid',
+              borderColor: 'secondary.main',
+              color: 'secondary.main',
+              borderRadius: 3,
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase',
+              minWidth: { xs: '220px', sm: '260px' },
+              boxShadow: '0 4px 20px rgba(253, 147, 79, 0.3)',
+              '&:hover': {
+                backgroundColor: 'rgba(253, 147, 79, 0.08)',
+                border: '3px solid',
+                borderColor: 'secondary.dark',
+                color: 'secondary.dark',
+                boxShadow: '0 6px 30px rgba(253, 147, 79, 0.4)',
+                transform: 'scale(1.02)',
+              },
+              transition: 'all 0.3s ease',
+            }}
+          >
+            Click to RSVP
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 }
 
 export default function RSVPPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <RSVPContent />
-    </Suspense>
-  );
+  return <RSVPPageContent />;
 }

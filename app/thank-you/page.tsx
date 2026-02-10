@@ -17,7 +17,6 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 function ThankYouContent() {
   const searchParams = useSearchParams();
-  const rsvpCode = searchParams.get('code');
   const attending = searchParams.get('attending') === 'true';
 
   return (
@@ -134,11 +133,6 @@ function ThankYouContent() {
                 </Box>
               </Box>
 
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 2.5, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-                A confirmation email has been sent to {' '}
-                <strong>your email address</strong>
-              </Typography>
-
               <Typography
                 variant="body2"
                 sx={{
@@ -165,10 +159,6 @@ function ThankYouContent() {
               >
                 We're sad you can't make it, but we understand.
               </Typography>
-
-              <Typography variant="body1" sx={{ mb: 2.5, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-                We hope to celebrate with you next time!
-              </Typography>
             </>
           )}
 
@@ -181,28 +171,13 @@ function ThankYouContent() {
           >
             If you have any questions or need to change your RSVP,
             <br />
-            please contact us at: <strong>wedding@example.com</strong>
-          </Typography>
-
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{
-              display: 'block',
-              mt: 2.5,
-              pt: 1.5,
-              borderTop: '1px solid',
-              borderColor: 'divider',
-              fontSize: { xs: '0.75rem', sm: '0.85rem' },
-            }}
-          >
-            Reference Code: {rsvpCode}
+            please contact us at: <strong>camilia.m.miguel@gmail.com</strong>
           </Typography>
 
           <Button
             variant="contained"
             color="secondary"
-            href={`/details?code=${rsvpCode}`}
+            href="/"
             sx={{
               mt: 2.5,
               px: { xs: 3, sm: 4 },

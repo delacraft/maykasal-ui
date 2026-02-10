@@ -25,6 +25,7 @@ const MENU_OPTIONS = [
   { value: 'codillo', label: 'Codillo de cerdo' },
   { value: 'ternera', label: 'Melosa de ternera' },
   { value: 'salmon', label: 'Suprema de salmon' },
+  { value: 'dietary', label: 'I have dietary restrictions' },
 ] as const;
 
 function getMenuLabel(value: string): string {
@@ -78,6 +79,7 @@ function RSVPConfirmationContent() {
     dietaryRestrictions: [],
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [dietaryError, setDietaryError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -95,6 +97,7 @@ function RSVPConfirmationContent() {
         [field]: undefined,
       });
     }
+    if (field === 'mainCourse') setDietaryError(null);
   };
 
   const handleDietaryToggle = (option: string) => () => {
@@ -103,9 +106,7 @@ function RSVPConfirmationContent() {
       ? current.filter((x) => x !== option)
       : [...current, option];
     setFormData({ ...formData, dietaryRestrictions: next });
-    if (errors.dietaryRestrictions) {
-      setErrors({ ...errors, dietaryRestrictions: undefined });
-    }
+    if (dietaryError) setDietaryError(null);
   };
 
   const validateForm = (): boolean => {
@@ -114,7 +115,14 @@ function RSVPConfirmationContent() {
     if (!formData.name?.trim()) newErrors.name = 'Please enter your name';
     if (formData.going === 'yes' && !formData.mainCourse) newErrors.mainCourse = 'Please select a main course';
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    let dietaryInvalid = false;
+    if (formData.going === 'yes' && formData.mainCourse === 'dietary' && formData.dietaryRestrictions.length === 0) {
+      setDietaryError('Please select at least one dietary restriction');
+      dietaryInvalid = true;
+    } else {
+      setDietaryError(null);
+    }
+    return Object.keys(newErrors).length === 0 && !dietaryInvalid;
   };
 
   const submitPayload = useCallback(
@@ -372,43 +380,51 @@ function RSVPConfirmationContent() {
                     )}
                   </FormControl>
 
-                  <Divider sx={{ my: 2.5 }} />
-
-                  {/* Dietary Restrictions */}
-                  <FormControl component="fieldset" fullWidth sx={{ mb: 2.5 }}>
-                    <FormLabel
-                      component="legend"
-                      sx={{
-                        fontWeight: 700,
-                        color: 'primary.main',
-                        mb: 1.5,
-                        fontSize: { xs: '1rem', sm: '1.1rem' },
-                      }}
-                    >
-                      Dietary Restrictions (Optional)
-                    </FormLabel>
-                    <FormGroup>
-                      {DIETARY_OPTIONS.map((option) => (
-                        <FormControlLabel
-                          key={option}
-                          control={
-                            <Checkbox
-                              color="secondary"
-                              size="small"
-                              checked={formData.dietaryRestrictions.includes(option)}
-                              onChange={handleDietaryToggle(option)}
+                  {/* Dietary Restrictions - only when "I have dietary restrictions" is selected, required then */}
+                  {formData.mainCourse === 'dietary' && (
+                    <>
+                      <Divider sx={{ my: 2.5 }} />
+                      <FormControl component="fieldset" fullWidth sx={{ mb: 2.5 }} error={!!dietaryError}>
+                        <FormLabel
+                          component="legend"
+                          sx={{
+                            fontWeight: 700,
+                            color: 'primary.main',
+                            mb: 1.5,
+                            fontSize: { xs: '1rem', sm: '1.1rem' },
+                          }}
+                        >
+                          Dietary Restrictions *
+                        </FormLabel>
+                        <FormGroup>
+                          {DIETARY_OPTIONS.map((option) => (
+                            <FormControlLabel
+                              key={option}
+                              control={
+                                <Checkbox
+                                  color="secondary"
+                                  size="small"
+                                  checked={formData.dietaryRestrictions.includes(option)}
+                                  onChange={handleDietaryToggle(option)}
+                                />
+                              }
+                              label={
+                                <Typography variant="body2" sx={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
+                                  {option}
+                                </Typography>
+                              }
+                              sx={{ ml: 0, mb: 0.5 }}
                             />
-                          }
-                          label={
-                            <Typography variant="body2" sx={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
-                              {option}
-                            </Typography>
-                          }
-                          sx={{ ml: 0, mb: 0.5 }}
-                        />
-                      ))}
-                    </FormGroup>
-                  </FormControl>
+                          ))}
+                        </FormGroup>
+                        {dietaryError && (
+                          <Typography variant="caption" color="error" sx={{ mt: 1, ml: 2 }}>
+                            {dietaryError}
+                          </Typography>
+                        )}
+                      </FormControl>
+                    </>
+                  )}
 
                 </>
               )}

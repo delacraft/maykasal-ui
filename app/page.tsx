@@ -694,7 +694,7 @@ END:VCALENDAR`;
               px: { xs: 1, sm: 2 },
             }}
           >
-            With all that we have, we&apos;ve been truly blessed. Your presence &amp; prayers are all that we request. But if you desire to give us nontheless, monetary gift is one we suggest.
+            With all that we have, we&apos;ve been truly blessed. Your presence &amp; prayers are all that we request. But if you desire to give us nonetheless, monetary gift is one we suggest.
           </Typography>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, mx: 'auto' }}>

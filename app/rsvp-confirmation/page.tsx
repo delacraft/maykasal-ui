@@ -453,7 +453,7 @@ function RSVPConfirmationContent() {
             color="text.secondary"
             sx={{ mt: 2, textAlign: 'center', fontSize: { xs: '0.8rem', sm: '0.875rem' } }}
           >
-            Please RSVP by February 28, 2026
+            Please RSVP by February 15, 2026
           </Typography>
         </Container>
       </Box>

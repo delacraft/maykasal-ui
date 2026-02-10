@@ -21,7 +21,8 @@ function RSVPPageContent() {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'background.default'
+        backgroundColor: 'background.default',
+        pb: { xs: '100px', sm: 0 }, // space for fixed button on mobile
       }}
     >
       {/* Greeting Text - Above Image */}
@@ -42,13 +43,13 @@ function RSVPPageContent() {
         </Typography>
       </Box>
 
-      {/* Invitation Image - smaller on mobile so button stays visible */}
+      {/* Invitation Image - full height on mobile since button is sticky */}
       <Box
         sx={{
           position: 'relative',
           width: '100%',
           flex: 1,
-          minHeight: { xs: '48vh', sm: '60vh', md: '72vh' },
+          minHeight: { xs: '60vh', sm: '62vh', md: '72vh' },
           backgroundColor: 'background.default',
         }}
       >
@@ -64,8 +65,21 @@ function RSVPPageContent() {
         />
       </Box>
 
-      {/* RSVP Button - pt so it sits higher, pb for safe area on notched phones */}
-      <Box sx={{ px: { xs: 1.5, sm: 2 }, pt: { xs: 2, sm: 2.5 }, pb: { xs: 3, sm: 3 }, backgroundColor: 'background.default' }}>
+      {/* RSVP Button - sticky at bottom on mobile, normal flow on desktop */}
+      <Box
+        sx={{
+          flexShrink: 0,
+          px: { xs: 1.5, sm: 2 },
+          pt: { xs: 2, sm: 2.5 },
+          pb: { xs: 'max(16px, env(safe-area-inset-bottom))', sm: 3 },
+          backgroundColor: 'background.default',
+          position: { xs: 'fixed', sm: 'relative' },
+          bottom: { xs: 0, sm: 'auto' },
+          left: { xs: 0, sm: 'auto' },
+          right: { xs: 0, sm: 'auto' },
+          zIndex: { xs: 10, sm: 'auto' },
+        }}
+      >
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             variant="outlined"

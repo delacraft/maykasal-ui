@@ -57,6 +57,8 @@ function RSVPPageContent() {
           src="/invitation.png"
           alt="Wedding Invitation"
           fill
+          quality={95}
+          sizes="100vw"
           style={{
             objectFit: 'contain',
             objectPosition: 'center top',

@@ -495,6 +495,8 @@ END:VCALENDAR`;
               src="/dresscode.png"
               alt="Dress Code"
               fill
+              quality={95}
+              sizes="(max-width: 1200px) 100vw, 1200px"
               style={{ objectFit: 'contain', border: 'none' }}
             />
           </Box>
@@ -553,6 +555,8 @@ END:VCALENDAR`;
               src="/dresscode.png"
               alt="Dress Code"
               fill
+              quality={95}
+              sizes="100vw"
               style={{ objectFit: 'contain' }}
             />
           </Box>

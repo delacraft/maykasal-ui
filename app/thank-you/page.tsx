@@ -171,7 +171,7 @@ function ThankYouContent() {
           >
             If you have any questions or need to change your RSVP,
             <br />
-            please contact us at: <strong>camilia.m.miguel@gmail.com</strong>
+            please contact Camilia at: <strong>+34659570735</strong>
           </Typography>
 
           <Button

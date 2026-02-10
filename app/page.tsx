@@ -721,7 +721,7 @@ END:VCALENDAR`;
             <Button
               variant="outlined"
               fullWidth
-              onClick={() => handleCopyToClipboard('+34659570735', 'Bizum copied to clipboard!')}
+              onClick={() => handleCopyToClipboard('+34664380635', 'Bizum copied to clipboard!')}
               startIcon={<PhoneIphoneIcon sx={{ color: 'secondary.main' }} />}
               sx={{
                 py: 2,

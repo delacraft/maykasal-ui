@@ -33,3 +33,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Liitan lang ang reCAPTCHA v3 badge */
+.grecaptcha-badge {
+  transform: scale(0.35);
+  transform-origin: bottom right;
+}

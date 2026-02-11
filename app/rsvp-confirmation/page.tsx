@@ -23,7 +23,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const MENU_OPTIONS = [
   { value: 'codillo', label: 'Codillo de cerdo' },
-  { value: 'ternera', label: 'Melosa de ternera' },
+  { value: 'ternera', label: 'Meloso de ternera' },
   { value: 'salmon', label: 'Suprema de salmon' },
   { value: 'dietary', label: 'I have dietary restrictions' },
 ] as const;

@@ -129,7 +129,7 @@ END:VCALENDAR`;
             fontWeight: 400,
           }}
         >
-          est 03.06.2006
+          est 06.03.2006
         </Typography>
       </Box>
       <List>
@@ -222,7 +222,7 @@ END:VCALENDAR`;
                   fontWeight: 400,
                 }}
               >
-                est 03.06.2006
+                est 06.03.2006
               </Typography>
             </Box>
           </Box>
@@ -291,43 +291,32 @@ END:VCALENDAR`;
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #4366F9 0%, #6A85FA 100%)',
-          color: 'white',
-          textAlign: 'center',
-          px: { xs: 2, sm: 3 },
+          backgroundColor: 'background.default',
+          px: { xs: 0, sm: 3 },
           pt: 8,
         }}
       >
-        <Container maxWidth="lg">
-          <FavoriteIcon sx={{ fontSize: { xs: 60, md: 80 }, mb: 3, color: 'secondary.main' }} />
-          <Typography
-            variant="h1"
+        <Container maxWidth="md" sx={{ px: { xs: '0 !important', sm: undefined } }}>
+          <Box
             sx={{
-              fontSize: { xs: '2.2rem', sm: '3rem', md: '5rem' },
-              fontWeight: 700,
-              mb: 2,
-              letterSpacing: '0.05em',
+              position: 'relative',
+              width: '100%',
+              minHeight: { xs: '84vh', sm: '70vh', md: '80vh' },
             }}
           >
-            ANDREI & CAMILIA
-          </Typography>
-          <Typography
-            variant="h4"
-            sx={{
-              fontSize: { xs: '1.1rem', sm: '1.5rem', md: '2.5rem' },
-              mb: { xs: 2.5, md: 3 },
-              fontStyle: 'italic',
-              fontWeight: 400,
-            }}
-          >
-            Wedding Celebration
-          </Typography>
-          <Typography variant="h5" sx={{ mb: 0.75, fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-            March 6, 2026 | 8:00 PM
-          </Typography>
-          <Typography variant="h6" sx={{ fontStyle: 'italic', opacity: 0.9, fontSize: { xs: '0.9rem', sm: '1.1rem' } }}>
-            Can Cortada
-          </Typography>
+            <Image
+              src="/invitation.png"
+              alt="Wedding Invitation"
+              fill
+              quality={95}
+              sizes="(max-width: 900px) 100vw, 900px"
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'center',
+              }}
+              priority
+            />
+          </Box>
         </Container>
       </Box>
 

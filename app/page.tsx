@@ -149,17 +149,6 @@ END:VCALENDAR`;
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem disablePadding>
-          <ListItemButton component={Link} href="/rsvp" sx={{ textAlign: 'center' }}>
-            <ListItemText
-              primary="RSVP"
-              primaryTypographyProps={{
-                fontSize: '1.1rem',
-                fontWeight: 600,
-              }}
-            />
-          </ListItemButton>
-        </ListItem>
       </List>
     </Box>
   );
@@ -244,16 +233,6 @@ END:VCALENDAR`;
                 {item.label}
               </Button>
             ))}
-            <Button
-              component={Link}
-              href="/rsvp"
-              variant="outlined"
-              color="secondary"
-              size="medium"
-              sx={{ fontWeight: 600, fontSize: '1.05rem' }}
-            >
-              RSVP
-            </Button>
           </Box>
 
           <IconButton

@@ -43,14 +43,37 @@ function HomePageContent() {
   const eventRef = useRef<HTMLDivElement>(null);
   const lookRef = useRef<HTMLDivElement>(null);
   const venueRef = useRef<HTMLDivElement>(null);
+  const uploadMemoriesRef = useRef<HTMLDivElement>(null);
+  const seatingPlanRef = useRef<HTMLDivElement>(null);
   const giftsRef = useRef<HTMLDivElement>(null);
 
   const menuItems = [
-    { label: 'Home', ref: heroRef },
-    { label: 'Event Details', ref: eventRef },
-    { label: 'The Outfit', ref: lookRef },
-    { label: 'The Venue', ref: venueRef },
-    { label: 'Gifts', ref: giftsRef },
+    { label: 'Home', ref: heroRef, href: '/#home' },
+    { label: 'Event Details', ref: eventRef, href: '/#event-details' },
+    { label: 'The Outfit', ref: lookRef, href: '/#the-outfit' },
+    { label: 'The Venue', ref: venueRef, href: '/#the-venue' },
+    { label: 'Gifts', ref: giftsRef, href: '/#gifts' },
+    { label: 'Upload Memories', ref: uploadMemoriesRef, href: '/#upload-memories' },
+    { label: 'Seating Plan', ref: seatingPlanRef, href: '/#seating-plan' },
+  ];
+
+  const seatingTables = [
+    {
+      title: 'MESA 1',
+      guests: ['PIKO', 'ARVEE', 'SAB', 'AREE', 'KAREN', 'MIGUEL', 'CATHY', 'ELISSA', 'SAM', 'LEA', 'VICTOR', 'EVAN', 'MIO'],
+    },
+    {
+      title: 'MESA 2',
+      guests: ['AARON', 'ABBIE', 'KYRIACOS', 'EFI', 'POL', 'DITA', 'ANDREA', 'ANILA', 'MAX', 'MONIKA', 'APRIL', 'VIC'],
+    },
+    {
+      title: 'MESA 3',
+      guests: ['KATH', 'JOEL', 'PATTI', 'JAY', 'MIHO', 'NADIA', 'IVAN', 'ALEXIA', 'NARISSA', 'ARLEEN', 'TARS', 'ZISH'],
+    },
+    {
+      title: 'MESA 4',
+      guests: ['IMIE', 'BASH', 'NINNI', 'PRINCE', 'KATRINA', 'JHENG', 'ALJON', 'SARAH', 'NATALIA', 'CHEMA', 'MARIEL', 'FAITH'],
+    },
   ];
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
@@ -136,8 +159,10 @@ END:VCALENDAR`;
         {menuItems.map((item) => (
           <ListItem key={item.label} disablePadding>
             <ListItemButton
+              component={Link}
+              href={item.href}
               sx={{ textAlign: 'center' }}
-              onClick={() => scrollToSection(item.ref)}
+              onClick={handleDrawerToggle}
             >
               <ListItemText
                 primary={item.label}
@@ -220,7 +245,8 @@ END:VCALENDAR`;
             {menuItems.map((item) => (
               <Button
                 key={item.label}
-                onClick={() => scrollToSection(item.ref)}
+                component={Link}
+                href={item.href}
                 sx={{
                   color: 'text.primary',
                   fontWeight: 600,
@@ -264,6 +290,7 @@ END:VCALENDAR`;
 
       {/* Hero Section */}
       <Box
+        id="home"
         ref={heroRef}
         sx={{
           minHeight: '100vh',
@@ -301,6 +328,7 @@ END:VCALENDAR`;
 
       {/* Event Details Section */}
       <Box
+        id="event-details"
         ref={eventRef}
         sx={{
           minHeight: '80vh',
@@ -413,6 +441,7 @@ END:VCALENDAR`;
 
       {/* The Outfit Section */}
       <Box
+        id="the-outfit"
         ref={lookRef}
         sx={{
           minHeight: '100vh',
@@ -533,6 +562,7 @@ END:VCALENDAR`;
 
       {/* The Venue Section */}
       <Box
+        id="the-venue"
         ref={venueRef}
         sx={{
           minHeight: '100vh',
@@ -628,6 +658,7 @@ END:VCALENDAR`;
 
       {/* Gifts Section */}
       <Box
+        id="gifts"
         ref={giftsRef}
         sx={{
           minHeight: '80vh',
@@ -710,6 +741,186 @@ END:VCALENDAR`;
             >
               Bizum
             </Button>
+          </Box>
+        </Container>
+      </Box>
+
+      <Box
+        id="upload-memories"
+        ref={uploadMemoriesRef}
+        sx={{
+          minHeight: '90vh',
+          backgroundColor: 'background.default',
+          pt: { xs: 10, md: 12 },
+          pb: { xs: 4, md: 6 },
+          px: { xs: 1.5, sm: 2 },
+        }}
+      >
+        <Container maxWidth="md">
+          <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
+            <FavoriteIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                fontWeight: 700,
+                color: 'secondary.main',
+                mb: 2,
+                letterSpacing: '0.05em',
+              }}
+            >
+              UPLOAD MEMORIES
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+                color: 'text.primary',
+                mb: 3,
+              }}
+            >
+              Scan the QR code or click the link below.
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: 420,
+              height: { xs: 320, sm: 420 },
+              mx: 'auto',
+              mb: 3,
+              borderRadius: 2,
+              overflow: 'hidden',
+              border: '2px solid',
+              borderColor: 'primary.main',
+              backgroundColor: 'background.paper',
+            }}
+          >
+            <Image
+              src="/qr-media-upload.png"
+              alt="QR code for uploading memories"
+              fill
+              sizes="(max-width: 600px) 90vw, 420px"
+              style={{ objectFit: 'contain' }}
+            />
+          </Box>
+
+          <Box sx={{ textAlign: 'center' }}>
+            <Button
+              component={Link}
+              href="https://guestcam.co/guest/bx6Db9R09q"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="contained"
+              color="secondary"
+              size="large"
+              sx={{
+                py: 1.5,
+                px: 4,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+                fontWeight: 700,
+                color: 'white',
+              }}
+            >
+              Upload Here!
+            </Button>
+          </Box>
+        </Container>
+      </Box>
+
+      <Box
+        id="seating-plan"
+        ref={seatingPlanRef}
+        sx={{
+          minHeight: '100vh',
+          backgroundColor: 'background.paper',
+          pt: { xs: 10, md: 12 },
+          pb: { xs: 4, md: 6 },
+          px: { xs: 1.5, sm: 2 },
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
+            <FavoriteIcon sx={{ fontSize: { xs: 45, md: 55 }, color: 'secondary.main', mb: 1.5 }} />
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                fontWeight: 700,
+                color: 'secondary.main',
+                mb: 2,
+                letterSpacing: '0.05em',
+              }}
+            >
+              SEATING PLAN
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              width: '100%',
+              maxWidth: '1000px',
+              mx: 'auto',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+              gridTemplateRows: 'repeat(2, minmax(220px, 1fr))',
+              gap: 2,
+            }}
+          >
+            {seatingTables.map((table) => (
+              <Box
+                key={table.title}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  px: 2,
+                  py: { xs: 2, sm: 2.5 },
+                  minHeight: { xs: 220, sm: 260 },
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{
+                    color: 'secondary.main',
+                    fontWeight: 700,
+                    fontSize: { xs: '1.2rem', sm: '1.45rem' },
+                    letterSpacing: '0.03em',
+                    textAlign: 'center',
+                    mb: 1.4,
+                  }}
+                >
+                  {table.title}
+                </Typography>
+
+                <Box
+                  sx={{
+                    width: '100%',
+                    display: 'grid',
+                    gap: 0.4,
+                  }}
+                >
+                  {table.guests.map((guest) => (
+                    <Typography
+                      key={`${table.title}-${guest}`}
+                      sx={{
+                        color: 'primary.main',
+                        fontWeight: 600,
+                        fontSize: { xs: '0.95rem', sm: '1.1rem' },
+                        lineHeight: 1.28,
+                        textAlign: 'center',
+                      }}
+                    >
+                      {guest}
+                    </Typography>
+                  ))}
+                </Box>
+              </Box>
+            ))}
           </Box>
         </Container>
       </Box>

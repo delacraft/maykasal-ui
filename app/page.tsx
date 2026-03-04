@@ -54,7 +54,7 @@ function HomePageContent() {
     { label: 'The Venue', ref: venueRef, href: '/#the-venue' },
     { label: 'Gifts', ref: giftsRef, href: '/#gifts' },
     { label: 'Upload Memories', ref: uploadMemoriesRef, href: '/#upload-memories' },
-    { label: 'Seating Plan', ref: seatingPlanRef, href: '/#seating-plan' },
+    { label: 'Seat Plan', ref: seatingPlanRef, href: '/#seat-plan' },
   ];
 
   const seatingTables = [
@@ -831,7 +831,7 @@ END:VCALENDAR`;
       </Box>
 
       <Box
-        id="seating-plan"
+        id="seat-plan"
         ref={seatingPlanRef}
         sx={{
           minHeight: '100vh',
@@ -856,7 +856,7 @@ END:VCALENDAR`;
                 letterSpacing: '0.05em',
               }}
             >
-              SEATING PLAN
+              SEAT PLAN
             </Typography>
           </Box>
 

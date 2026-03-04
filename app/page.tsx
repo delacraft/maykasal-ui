@@ -54,17 +54,17 @@ function HomePageContent() {
     { label: 'The Venue', ref: venueRef, href: '/#the-venue' },
     { label: 'Gifts', ref: giftsRef, href: '/#gifts' },
     { label: 'Upload Memories', ref: uploadMemoriesRef, href: '/#upload-memories' },
-    { label: 'Seat Plan', ref: seatingPlanRef, href: '/#seat-plan' },
+    { label: 'We Saved You a Seat!', ref: seatingPlanRef, href: '/#seat-plan' },
   ];
 
   const seatingTables = [
     {
       title: 'MESA 1',
-      guests: ['PIKO', 'ARVEE', 'SAB', 'AREE', 'KAREN', 'MIGUEL', 'CATHY', 'ELISSA', 'SAM', 'LEA', 'VICTOR', 'EVAN', 'MIO'],
+      guests: ['PIKO', 'ARVEE', 'SAB', 'AREE', 'KAREN', 'MIGUEL', 'CATHY', 'ELISSA', 'SAM', 'LEA', 'VICTOR', 'EVAN'],
     },
     {
       title: 'MESA 2',
-      guests: ['AARON', 'ABBIE', 'KYRIACOS', 'EFI', 'POL', 'DITA', 'ANDREA', 'ANILA', 'MAX', 'MONIKA', 'APRIL', 'VIC'],
+      guests: ['AARON', 'ABBIE', 'KYRIACOS', 'EFI', 'POL', 'DITA', 'ANDREA', 'ANILA', 'MAX', 'MONIKA', 'APRIL', 'VIC', 'MIO'],
     },
     {
       title: 'MESA 3',
@@ -856,71 +856,79 @@ END:VCALENDAR`;
                 letterSpacing: '0.05em',
               }}
             >
-              SEAT PLAN
+              WE SAVED YOU A SEAT!
             </Typography>
           </Box>
 
           <Box
             sx={{
               width: '100%',
-              maxWidth: '1000px',
+              maxWidth: '1040px',
               mx: 'auto',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-              gridTemplateRows: { xs: 'repeat(2, minmax(55vh, 1fr))', md: 'repeat(2, minmax(320px, 1fr))' },
-              gap: { xs: 3, md: 2 },
+              p: { xs: 1.5, sm: 2 },
             }}
           >
-            {seatingTables.map((table) => (
-              <Box
-                key={table.title}
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-start',
-                  px: 2,
-                  py: { xs: 3, sm: 2.8 },
-                  minHeight: { xs: '55vh', md: 320 },
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    color: 'secondary.main',
-                    fontWeight: 700,
-                    fontSize: { xs: '1.35rem', sm: '1.6rem' },
-                    letterSpacing: '0.03em',
-                    textAlign: 'center',
-                    mb: 2,
-                  }}
-                >
-                  {table.title}
-                </Typography>
-
+            <Box
+              sx={{
+                width: '100%',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gridTemplateRows: { xs: 'repeat(2, minmax(40vh, 1fr))', md: 'repeat(2, minmax(280px, 1fr))' },
+                columnGap: { xs: 1, md: 1.2 },
+                rowGap: { xs: 1.2, md: 1.2 },
+              }}
+            >
+              {seatingTables.map((table) => (
                 <Box
+                  key={table.title}
                   sx={{
-                    width: '100%',
-                    display: 'grid',
-                    gap: 0.4,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    px: 1.2,
+                    py: { xs: 2, sm: 2.2 },
+                    minHeight: { xs: '40vh', md: 280 },
                   }}
                 >
-                  {table.guests.map((guest) => (
-                    <Typography
-                      key={`${table.title}-${guest}`}
-                      sx={{
-                        color: 'primary.main',
-                        fontWeight: 600,
-                        fontSize: { xs: '1rem', sm: '1.12rem' },
-                        lineHeight: 1.35,
-                        textAlign: 'center',
-                      }}
-                    >
-                      {guest}
-                    </Typography>
-                  ))}
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      color: 'secondary.main',
+                      fontWeight: 700,
+                      fontSize: { xs: '1.35rem', sm: '1.6rem' },
+                      letterSpacing: '0.03em',
+                      textAlign: 'center',
+                      mb: 2,
+                    }}
+                  >
+                    {table.title}
+                  </Typography>
+
+                  <Box
+                    sx={{
+                      width: '100%',
+                      display: 'grid',
+                      gap: 0.4,
+                    }}
+                  >
+                    {table.guests.map((guest) => (
+                      <Typography
+                        key={`${table.title}-${guest}`}
+                        sx={{
+                          color: 'primary.main',
+                          fontWeight: 600,
+                          fontSize: { xs: '1rem', sm: '1.12rem' },
+                          lineHeight: 1.35,
+                          textAlign: 'center',
+                        }}
+                      >
+                        {guest}
+                      </Typography>
+                    ))}
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              ))}
+            </Box>
           </Box>
         </Container>
       </Box>

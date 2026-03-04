@@ -867,8 +867,8 @@ END:VCALENDAR`;
               mx: 'auto',
               display: 'grid',
               gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-              gridTemplateRows: 'repeat(2, minmax(220px, 1fr))',
-              gap: 2,
+              gridTemplateRows: { xs: 'repeat(2, minmax(55vh, 1fr))', md: 'repeat(2, minmax(320px, 1fr))' },
+              gap: { xs: 3, md: 2 },
             }}
           >
             {seatingTables.map((table) => (
@@ -879,8 +879,8 @@ END:VCALENDAR`;
                   flexDirection: 'column',
                   justifyContent: 'flex-start',
                   px: 2,
-                  py: { xs: 2, sm: 2.5 },
-                  minHeight: { xs: 220, sm: 260 },
+                  py: { xs: 3, sm: 2.8 },
+                  minHeight: { xs: '55vh', md: 320 },
                 }}
               >
                 <Typography
@@ -888,10 +888,10 @@ END:VCALENDAR`;
                   sx={{
                     color: 'secondary.main',
                     fontWeight: 700,
-                    fontSize: { xs: '1.2rem', sm: '1.45rem' },
+                    fontSize: { xs: '1.35rem', sm: '1.6rem' },
                     letterSpacing: '0.03em',
                     textAlign: 'center',
-                    mb: 1.4,
+                    mb: 2,
                   }}
                 >
                   {table.title}
@@ -910,8 +910,8 @@ END:VCALENDAR`;
                       sx={{
                         color: 'primary.main',
                         fontWeight: 600,
-                        fontSize: { xs: '0.95rem', sm: '1.1rem' },
-                        lineHeight: 1.28,
+                        fontSize: { xs: '1rem', sm: '1.12rem' },
+                        lineHeight: 1.35,
                         textAlign: 'center',
                       }}
                     >
